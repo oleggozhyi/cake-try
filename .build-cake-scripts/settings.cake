@@ -22,9 +22,8 @@ public static class SettingsManager {
 
 public class Settings {
     public string Target = "Default";
-    public string Configuration = "Release";
     public TasksFilterSettings TasksFilter = new TasksFilterSettings();
-    public OutputSettings Output = new OutputSettings();
+    public BuildSettings Build = new BuildSettings();
 }
 
 public class TasksFilterSettings {
@@ -32,12 +31,18 @@ public class TasksFilterSettings {
     public string TasksToSkip = "";
 }
 
-public class OutputSettings {
-    public string OutputDir = "./outputDir";
-    public string CodeCoverageDir = "./outputDir/codeCoverage";
+public class BuildSettings {
+    public string Configuration = "Release";
     public string BinariesDir = "./outputDir/binaries";
+    public Verbosity Verbosity = Verbosity.Minimal;
+
+    public MSBuildSettings ToMSBuildSettings(ICakeContext context) {
+        var outdirAbs = context.MakeAbsolute(context.Directory(BinariesDir)).FullPath;
+        return new MSBuildSettings()
+        {
+            Configuration = Configuration,
+            Verbosity =  Verbosity
+        }.WithProperty("OutDir", outdirAbs);;
+    }
 }
 
-public static string AsAbsolutePath(ICakeContext context, string path) {
-        return context.MakeAbsolute(new FilePath(path)).FullPath;
-}

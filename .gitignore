@@ -3,11 +3,12 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+
 # Cake
 
 tools/*
 !tools/packages.config
-
+.outputDir/
 
 # User-specific files
 *.suo

@@ -13,16 +13,21 @@ TaskSetup(ctx => {
 
 Task("Clean-OutputDirs")
     .Does(() => {
-        CleanDirectories(settings.Output.CodeCoverageDir);
-        CleanDirectories(settings.Output.BinariesDir);
+        CleanDirectories(settings.Build.BinariesDir);
     });
 Task("Nuget-RestorePackages")
     .Does(() => {
-        var solutions = GetFiles("./src/*.sln");
-        NuGetRestore(solutions, new NuGetRestoreSettings {  });
+        NuGetRestore(File("./src/CakeTry.sln"), new NuGetRestoreSettings {  });
     });
+Task("Build-Solution")
+    .IsDependentOn("Clean-OutputDirs")
+    .IsDependentOn("Nuget-RestorePackages")
+    .Does(() =>{
+        MSBuild("./src/CakeTry.sln", settings.Build.ToMSBuildSettings(Context));
+    });
+    
 Task("Default")
-    .IsDependentOn("Nuget-RestorePackages");
+    .IsDependentOn("Build-Solution");
 
 TaskSetup(ctx => {
     executionManager.RunOrSkip(ctx.Task);

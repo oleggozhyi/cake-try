@@ -1,14 +1,13 @@
 { 
     "target" : "Default",
-    "configuration": "Release",
-    
+
     "tasksFilter": {
         "tasksToRun": "",
         "tasksToSkip": ""
     },
-    "output": {
-        "outputDir": "./.outputDir",
-        "codeCoverageDir": "./.outputDir/codeCoverage",
-        "binariesDir": "./.outputDir/binaries"
+    "build": {
+        "configuration": "Release",
+        "verbosity": "Minimal",
+         "binariesDir": "./.outputDir/binaries"
     }
 }
