@@ -1,0 +1,9 @@
+{ 
+    "target" : "Default",
+    "configuration": "Release",
+    
+    "tasksFilter": {
+        "tasksToRun": "",
+        "tasksToSkip": ""
+    }
+}
