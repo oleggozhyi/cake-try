@@ -1,0 +1,7 @@
+{
+	"Target": "Default.Local",
+	"TasksFilter": {
+		"TasksToRun": "",
+		"TasksToSkip": ""
+	}
+}
