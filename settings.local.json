@@ -5,5 +5,10 @@
     "tasksFilter": {
         "tasksToRun": "",
         "tasksToSkip": ""
+    },
+    "output": {
+        "outputDir": "./.outputDir",
+        "codeCoverageDir": "./.outputDir/codeCoverage",
+        "binariesDir": "./.outputDir/binaries"
     }
 }
