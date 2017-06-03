@@ -17,27 +17,20 @@ TaskSetup(ctx => {
 });
 
 Task("Clean-OutputDirs")
-    .Does(() => {
-        CleanDirectories(settings.Build.BinariesDir);
-        CleanDirectories(settings.Build.OutDir);
-        CleanDirectories(settings.Test.CoverageDir);
-    });
+    .Does(() => CleanDirectories(settings.Build.OutDir));
 Task("Nuget-RestorePackages")
-    .Does(() => {
-        NuGetRestore(File("./src/CakeTry.sln"), new NuGetRestoreSettings {  });
-    });
+    .Does(() => NuGetRestore(File("./src/CakeTry.sln")));
 Task("Build-Solution")
     .IsDependentOn("Clean-OutputDirs")
     .IsDependentOn("Nuget-RestorePackages")
-    .Does(() =>{
-        MSBuild("./src/CakeTry.sln", settings.Build.ToMSBuildSettings(Context));
-    });
+    .Does(() => MSBuild("./src/CakeTry.sln", 
+        settings.Build.ToMSBuildSettings(Context))
+    );
 Task("XUnitTest-NoCoverage")
     .IsDependentOn("Build-Solution")
-    .Does(() => {
-        XUnit2(GetFiles(settings.Build.BinariesDir + "/*.Unit.Tests.dll"),
-            new XUnit2Settings { ShadowCopy = false });
-    });
+    .Does(() => XUnit2(GetFiles(settings.Build.BinariesDir + "/*.Unit.Tests.dll"), 
+        new XUnit2Settings { ShadowCopy = false })
+    );
 Task("XUnitTest-Dotcover")
     .IsDependentOn("Build-Solution")
     .Does(() => {
@@ -90,15 +83,13 @@ Task("Report-TestCoverage")
         new FilePath(settings.Test.CoverageDir + "/sonarCoverageReport.html"),
         new DotCoverReportSettings { ReportType = DotCoverReportType.HTML });
     });
-Task("Default.Local")
+
+
+Task("Default-Local")
     .IsDependentOn("XUnitTest-NoCoverage")
     .IsDependentOn("BddTest-NoCoverage");
 
-Task("Default.Teamcity")
+Task("Default-Teamcity")
     .IsDependentOn("Report-TestCoverage");
-
-TaskSetup(ctx => {
-    executionManager.RunOrSkip(ctx.Task);
-});
 
 RunTarget(settings.Target);
