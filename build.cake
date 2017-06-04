@@ -93,7 +93,7 @@ Task("Report-TestCoverage")
 
 
 Task("Default-Local")
-    // .IsDependentOn("XUnitTest-NoCoverage")
+    .IsDependentOn("XUnitTest-NoCoverage")
     .IsDependentOn("BddTest-NoCoverage");
 
 Task("Default-Teamcity")
