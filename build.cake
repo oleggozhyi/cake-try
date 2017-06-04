@@ -59,7 +59,7 @@ Task("BddTest-NoCoverage")
                 NoIsolation = false,
                 ToolPath = MsTestHelper.GetToolPath(Context)
             });
-        TeamCity.ImportData("mstest" ,settings.Test.CoverageDir + "/FullCodeCoverage.dcvr");
+        TeamCity.ImportData("mstest", settings.Build.OutDir + "/TestResult.trx");
     });
 Task("BddTest-Dotcover")
     .IsDependentOn("Build-Solution")
@@ -75,7 +75,7 @@ Task("BddTest-Dotcover")
             new DotCoverCoverSettings { LogFile = File(settings.Test.CoverageDir + "/mstest-dotcover-log.txt") }
                 .WithFilter("+:CakeTry.*")
                 .WithFilter("-:CakeTry.*.*.Test*"));
-        TeamCity.ImportData("mstest" ,settings.Test.CoverageDir + "/FullCodeCoverage.dcvr");
+        TeamCity.ImportData("mstest", settings.Build.OutDir + "/TestResult.trx");
     });
 Task("Merge-TestCoverage")
     .IsDependentOn("XUnitTest-Dotcover")
