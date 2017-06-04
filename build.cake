@@ -17,10 +17,10 @@ Information("TeamCity.IsRunningOnTeamCity = " + TeamCity.IsRunningOnTeamCity);
 TaskSetup(ctx => {
     executionManager.RunOrSkip(ctx.Task);
     
-    TeamCity.WriteStartBlock("Step " + ctx.Task.Name);
+    TeamCity.WriteStartBlock("Step <" + ctx.Task.Name + ">");
 });
 TaskTeardown(ctx => {
-    TeamCity.WriteEndBlock("Step " + ctx.Task.Name);
+    TeamCity.WriteEndBlock("Step <" + ctx.Task.Name + ">");
 });
 
 Task("Clean-OutputDirs")
