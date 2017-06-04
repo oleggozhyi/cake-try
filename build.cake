@@ -27,7 +27,7 @@ Task("Build-Solution")
     .IsDependentOn("Nuget-RestorePackages")
     .Does(() => MSBuild("./src/CakeTry.sln", 
         settings.Build.ToMSBuildSettings(Context))
-    ).ReportError(exception => TeamCity.BuildProblem("Build-Solution", null));;
+    ).ReportError(exception => TeamCity.BuildProblem("Build solution failed", "msbuild"));;
 Task("XUnitTest-NoCoverage")
     .IsDependentOn("Build-Solution")
     .Does(() => XUnit2(GetFiles(settings.Build.BinariesDir + "/*.Unit.Tests.dll"), 
