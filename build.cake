@@ -82,6 +82,7 @@ Task("Merge-TestCoverage")
         DotCoverMerge(GetFiles(settings.Test.CoverageDir + "/*.dcvr"),
              new FilePath(settings.Test.CoverageDir + "/FullCodeCoverage.dcvr")
         );
+        TeamCity.ImportDotCoverCoverage(settings.Test.CoverageDir + "/FullCodeCoverage.dcvr");
     });
 Task("Report-TestCoverage")
     .IsDependentOn("Merge-TestCoverage")
