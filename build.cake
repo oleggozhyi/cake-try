@@ -12,6 +12,8 @@
 var settings = SettingsManager.LoadSettings(Context);
 var executionManager = new ExecutionManager(Context, settings.TasksFilter);
 
+Information("TeamCity.IsRunningOnTeamCity = " + TeamCity.IsRunningOnTeamCity);
+
 TaskSetup(ctx => {
     executionManager.RunOrSkip(ctx.Task);
 });
