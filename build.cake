@@ -20,7 +20,7 @@ TaskSetup(ctx => {
     TeamCity.WriteStartProgress("Starting " + ctx.Task.Name);
 });
 TaskTeardown(ctx => {
-    TeamCity.WriteStartProgress("Finished " + ctx.Task.Name);
+    TeamCity.WriteEndProgress("Finished " + ctx.Task.Name);
 });
 
 Task("Clean-OutputDirs")
