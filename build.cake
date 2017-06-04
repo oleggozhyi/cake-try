@@ -16,6 +16,11 @@ Information("TeamCity.IsRunningOnTeamCity = " + TeamCity.IsRunningOnTeamCity);
 
 TaskSetup(ctx => {
     executionManager.RunOrSkip(ctx.Task);
+    
+    TeamCity.WriteStartProgress("Starting " + ctx.Task.Name);
+});
+TaskTeardown(ctx => {
+    TeamCity.WriteStartProgress("Finished " + ctx.Task.Name);
 });
 
 Task("Clean-OutputDirs")
