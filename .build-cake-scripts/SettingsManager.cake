@@ -1,4 +1,7 @@
+#addin "Newtonsoft.Json"
 #load "./Settings.cake"
+
+using Newtonsoft.Json;
 
 public static class SettingsManager {
     public static Settings LoadSettings(ICakeContext context) {
@@ -11,11 +14,11 @@ public static class SettingsManager {
         } else {
             context.Information("Reading settings from " + settingsFile);
             var settingsJson = context.FileReadText(settingsFile);    
-            settings = context.DeserializeJson<Settings>(settingsJson);
+            settings = JsonConvert.DeserializeObject<Settings>(settingsJson);
         }
 
         context.Information("=====BUILD SETTINGS==========================\n");
-        context.Information(context.SerializeJson(settings));
+        context.Information(JsonConvert.SerializeObject(settings, Formatting.Indented));
         context.Information("=============================================");
 
         return settings;

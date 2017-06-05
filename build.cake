@@ -1,7 +1,6 @@
 #tool "XUnit.Runner.Console"
 #tool "JetBrains.dotCover.CommandLineTools"
 
-#addin "Cake.Json"
 #addin "Cake.FileHelpers"
 
 #load "./.build-cake-scripts/Settings.cake"
@@ -74,7 +73,7 @@ Task("BddTest-Dotcover")
             new FilePath(settings.Test.CoverageDir + "/MSTestCoverage.dcvr"),
             new DotCoverCoverSettings { LogFile = File(settings.Test.CoverageDir + "/mstest-dotcover-log.txt") }
                 .WithFilter("+:CakeTry.*")
-                .WithFilter("-:CakeTry.*.*.Test*"));
+                .WithFilter("-:CakeTry.*.*.Test*"));        
         TeamCity.ImportData("mstest", settings.Build.OutDir + "/TestResult.trx");
     });
 Task("Merge-TestCoverage")
