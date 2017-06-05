@@ -72,11 +72,11 @@ Task("Report-TestCoverage").Does(() => {
 });
 
 Task("Default-Local")
-    // .IsDependentOn("Clean-OutputDirs")
-    // .IsDependentOn("Nuget-RestorePackages")
+     .IsDependentOn("Clean-OutputDirs")
+     .IsDependentOn("Nuget-RestorePackages")
     .IsDependentOn("Build-Solution")
-    .IsDependentOn("XUnitTest-NoCoverage");
-    // .IsDependentOn("BddTest-NoCoverage");
+    .IsDependentOn("XUnitTest-NoCoverage")
+     .IsDependentOn("BddTest-NoCoverage");
 
 Task("Default-Teamcity")
     .IsDependentOn("Clean-OutputDirs")
