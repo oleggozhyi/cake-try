@@ -1,5 +1,5 @@
 {
-	"Target": "Default-Teamcity",
+	"Target": "Default-Local",
 	"TasksFilter": {
 		"TasksToRun": "",
 		"TasksToSkip": ""
