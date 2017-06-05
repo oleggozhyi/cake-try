@@ -8,7 +8,7 @@
 #load "./.build-cake-scripts/ExecutionManager.cake"
 #load "./.build-cake-scripts/MsTestHelper.cake"
 
-var settings = SettingsManager.LoadSettings(Context);
+var settings = SettingsManager.LoadSettings(Context, TeamCity);
 var executionManager = new ExecutionManager(Context, settings.TasksFilter);
 
 Information("TeamCity.IsRunningOnTeamCity = " + TeamCity.IsRunningOnTeamCity);
